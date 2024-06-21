@@ -1,0 +1,67 @@
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+
+.logo{
+    width: 15%;
+    height: 15%;
+ }
+
+ .logo_admin{
+   width: 2.5%;
+   height: 2.5%;
+}
+
+ .card-img-top{
+  width: 100%; 
+  height: 200px;
+  object-fit: contain;
+ }
+
+ .admin_img{
+   width: 100px;
+   object-fit: contain;
+ }
+
+ /* style.css */
+#cartItemList {
+   max-height: 400px;
+   overflow-y: auto;
+}
+
+.modal-body {
+   padding: 15px;
+}
+
+.list-group-item {
+   margin-bottom: 10px;
+   border-radius: 5px;
+}
+
+.img-thumbnail {
+   max-width: 100%;
+   height: auto;
+   border: 1px solid #dee2e6;
+   border-radius: 0.25rem;
+}
+
+.modal-lg {
+   max-width: 90%;
+}
+
+@media (min-width: 576px) {
+   .modal-dialog {
+       max-width: calc(100% - 30px);
+       margin: 1.75rem auto;
+   }
+}
+.img-fluid {
+   max-width: 100%;
+   height: auto;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
