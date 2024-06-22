@@ -2,6 +2,7 @@
 include('../index/includes/connect.php');
 session_start(); // Memulai session PHP (jika belum dimulai)
 
+
 // Inisialisasi session untuk keranjang belanja jika belum ada
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array(); // Sesuaikan dengan struktur data keranjang Anda
@@ -77,7 +78,9 @@ if (!empty($selected_category)) {
 $result_query = mysqli_query($con, $select_query);
 
 // Periksa apakah pengguna sudah login
+// Periksa apakah pengguna sudah login
 $is_logged_in = isset($_SESSION['user_id']);
+$user_name = $is_logged_in ? $_SESSION['username'] : ''
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +93,7 @@ $is_logged_in = isset($_SESSION['user_id']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="stylesheet" href="./public/view/css/style.css"> 
     <script src="./public/view/js/main.js"></script>
     <style>
@@ -182,6 +185,8 @@ $is_logged_in = isset($_SESSION['user_id']);
                     <ul></ul>
                     <!-- Tombol Login/Logout -->
                     <?php if ($is_logged_in): ?>
+                                <span class="nav-link">Welcome, <?php echo htmlspecialchars($user_name); ?>!</span>
+                                <ul></ul>
                         <button type="button" class="btn btn-outline-danger" onclick="window.location.href='./auth/logout.php'">Logout</button>
                     <?php else: ?>
                         <button type="button" class="btn btn-outline-primary" onclick="window.location.href='./auth/login.php'">Login</button>
@@ -207,7 +212,7 @@ $is_logged_in = isset($_SESSION['user_id']);
                         ?>
                         <div class='col-md-4 mb-2'>
                             <div class='card' style='width: 18rem;'>
-                                <img src='./public/view/css/assets/product_img/<?php echo $product_image; ?>' class='card-img-top' alt='<?php echo $product_title; ?>'>
+                                <img src='../admin_area/product_images/<?php echo $product_image; ?>' class='card-img-top' alt='<?php echo $product_title; ?>'>
                                 <div class='card-body'>
                                     <h5 class='card-title'><?php echo $product_title; ?></h5>
                                     <p class='card-text'><?php echo $product_description; ?></p>
@@ -266,7 +271,7 @@ $is_logged_in = isset($_SESSION['user_id']);
                                 echo '<li class="list-group-item">';
                                 echo '<div class="row">';
                                 echo '<div class="col-md-3">';
-                                echo '<img src="./public/view/css/assets/product_img/' . $product_data['product_image'] . '" class="img-thumbnail" alt="' . $product_data['product_title'] . '">';
+                                echo '<img src="../admin_area/product_images/' . $product_data['product_image'] . '" class="img-thumbnail" alt="' . $product_data['product_title'] . '">';
                                 echo '</div>';
                                 echo '<div class="col-md-7">';
                                 echo '<strong>ID Produk:</strong> ' . $product_id . '<br>';

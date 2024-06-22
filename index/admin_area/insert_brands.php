@@ -15,7 +15,6 @@ include('../includes/connect.php');
             $result = mysqli_query($con, $insert_query);
             if($result){
                 echo "<script>alert('Brands Inserted Successfully')</script>";
-            echo "<script>window.location.href='insert_brands.php';</script>";
 
             } else {
                 echo "<script>alert('Brands Not Inserted: " . mysqli_error($con) . "')</script>";

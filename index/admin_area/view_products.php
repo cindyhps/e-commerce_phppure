@@ -13,6 +13,8 @@ if(isset($_GET['delete'])){
         // Redirect to prevent re-submission
         header("Location: {$_SERVER['PHP_SELF']}");
         exit();
+    } else {
+        echo "<script>alert('Failed to delete product');</script>";
     }
 }
 
@@ -92,44 +94,46 @@ if(isset($_POST['search_product'])){
 
         <!-- Display products -->
         <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Keywords</th>
-                    <th>Category</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if(isset($result_query)){
-                    while($row = mysqli_fetch_assoc($result_query)){
-                        echo "<tr>
-                            <td>{$row['product_id']}</td>
-                            <td>{$row['product_title']}</td>
-                            <td>{$row['product_description']}</td>
-                            <td>{$row['product_keywords']}</td>
-                            <td>{$row['category_id']}</td>
-                            <td>{$row['brand_id']}</td>
-                            <td>{$row['product_price']}</td>
-                            <td><img src='../admin_area/product_images/{$row['product_image']}' width='50' height='50'></td>
-                            <td>
-                                <a href='view_products.php?edit={$row['product_id']}' class='btn btn-primary btn-sm'>Edit</a>
-                                <a href='view_products.php?delete={$row['product_id']}' class='btn btn-danger btn-sm'>Delete</a>
-                            </td>
-                        </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='9' class='text-center'>No products found.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Keywords</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if(isset($result_query)){
+            while($row = mysqli_fetch_assoc($result_query)){
+                echo "<tr>
+                    <td>{$row['product_id']}</td>
+                    <td>{$row['product_title']}</td>
+                    <td>{$row['product_description']}</td>
+                    <td>{$row['product_keywords']}</td>
+                    <td>{$row['category_id']}</td>
+                    <td>{$row['brand_id']}</td>
+                    <td>{$row['product_stock']}</td>
+                    <td>{$row['product_price']}</td>
+                    <td><img src='../admin_area/product_images/{$row['product_image']}' width='50' height='50'></td>
+                    <td>
+                        <a href='view_products.php?edit={$row['product_id']}' class='btn btn-primary btn-sm'>Edit</a>
+                        <a href='view_products.php?delete={$row['product_id']}' class='btn btn-danger btn-sm'>Delete</a>
+                    </td>
+                </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='10' class='text-center'>No products found.</td></tr>";
+        }
+        ?>
+    </tbody>
+</table>
 
         <!-- Update product form -->
         <?php

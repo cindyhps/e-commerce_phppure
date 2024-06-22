@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Pastikan pengguna telah login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../index.php"); // Arahkan ke halaman login jika belum login
+    exit;
+}
+
+// Inisialisasi variabel user_name dari session
+$user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +49,7 @@
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Welcome Guest</a>
+                        <span class="nav-link">Welcome, <?php echo htmlspecialchars($user_name); ?>!</span>
                         </li>
                     </ul>
                 </nav>
@@ -52,8 +65,8 @@
         <div class="row">
             <div class="col-md-12 bg-secondary p-1 d-flex align-items-center">
                 <div class="p-3">
-                    <a href="#"><img src="../public/view/css/assets/product_img/camera_kuno.jpg" alt="" class="admin_img"></a>
-                    <p class="text-light text-center">Admin Name</p>
+
+                            
                 </div>
                 <!-- Button Admin Manipulate Data -->
                 <div class="button text-center m-auto">
@@ -63,6 +76,7 @@
                     <button>
                         <a href="view_products.php" class="nav-link text-light bg-info my-1">View Products</a>
                     </button>
+
                     <button>
                         <a href="index_admin.php?insert_category" class="nav-link text-light bg-info my-1">Insert Categories</a>
                     </button>
